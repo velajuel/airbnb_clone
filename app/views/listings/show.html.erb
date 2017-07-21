@@ -1,0 +1,9 @@
+<% @show.image.each do |photo| %>
+    <p><%= image_tag list.avatars[0].url %></p>
+    <% end %>
+<p><%= @show.property_type %></p>
+<p><%= @show.description %></p>
+<p><%= @show.price %></p>
+
+
+<%= link_to "back to user", user_listings_path(current_user.id)%> 

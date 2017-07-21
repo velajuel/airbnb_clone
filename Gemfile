@@ -9,7 +9,8 @@ gem 'clearance'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.4'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# gem 'sqlite3'
+gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
@@ -28,6 +29,25 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 gem 'figaro'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'faker'
+gem 'will_paginate', '~> 3.1.0'
+gem 'rest-client'
+
+gem 'braintree'
+
+gem 'sidekiq' 
+gem 'foreman'
+gem 'rails_12factor'
+
+gem 'carrierwave', '~> 1.0'
+gem 'mini_magick', '~> 4.3'
+
+gem 'bootstrap-sass', '~> 3.3.6'
+
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password

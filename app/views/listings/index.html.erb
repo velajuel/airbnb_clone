@@ -1,0 +1,96 @@
+
+
+<br>
+  <center><%= form_tag(@listings, :method => "get", id: "search-form") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search Listings" %>
+    <%= submit_tag "Search", :name => nil %>
+<% end %>
+
+<% if @listing_search.blank? %>
+  <h4>There are no listings containing the term <%= params[:search] %>.</h4>
+<% else %>
+  <tr>
+  <% @listing_search.each do |t| %>
+    <td><%= t.property_type %></td>
+    <td><%= t.description %></td>
+    <td><%= t.price %></td>
+  </tr><br>
+  <% end %>
+<% end %>
+
+<%= link_to "Make a new listing", new_user_listing_path(current_user.id) %>
+
+
+<p><b>Your Listing</b></p>
+<% if @listing.is_a? String %>
+	<%= @listing %>
+	<% else %>
+	<table>
+  <tr>
+  <td>Property Type</td>
+  <td>Description</td>
+  <td>Price</td>
+  <tr><br>
+  </table>
+  <% @listing.each do |list| %>
+  <td><%= list.property_type %> </td>
+  <td><%= list.description %></td>
+  <td><%= list.price %></td><br>
+
+<% if list.avatars.empty? %>
+<% "no picture uploaded" %>
+<% else %>
+<%list.avatars.each do |photo| %>
+<%= image_tag photo.thumb.url %>
+<%end%>
+<% end %>
+
+  <td><%=link_to "edit" , edit_user_listing_path(current_user.id, list.id)%></td>
+  <td><%= link_to "delete" , user_listing_path(current_user.id, list.id), method: :delete, data:{confirm: "are you sure?"} %></td><br>
+  </tr> 
+  <% end %>
+<% end %>
+
+<%= will_paginate @listing %>
+
+
+<p><b>Full Listing</b></p>
+<% if @listing.is_a? String %>
+  <%= @listing %>
+  <% else %>
+  <table>
+  <tr>
+  <td>Property Type</td>
+  <td>Description</td>
+  <td>Price</td>
+  <tr><br>
+  </table>
+  <% @listing.each do |list| %>
+  <td><%= list.property_type %> </td>
+  <td><%= list.description %></td>
+  <td><%= list.price %></td><br>
+  <td></td>
+
+<td><%= button_to("Check Availability", new_listing_reservation_path(list.id), method: :get) %></td>
+
+      <% if list.verified? %>
+  <td><%= "verified property" %></td>
+    <% else %>
+  <td><%= "non-verified property" %></td>
+      <% if current_user.admin? %>
+  <td>
+      <%= form_for [User.find(list.user_id), list],  method: :patch do |f| %>
+
+        <%= f.label :verification %>
+        <%= f.select :verification, options_for_select([["Not Verified", "not_verified"], ["Verified", "verified"]]) %>
+        <%= f.submit :submit %>
+      <% end %>
+  </td><br>
+ 
+
+      <% end %>
+    <% end %>
+   <% end %>
+  <% end %>
+
+<%= will_paginate @listing %>

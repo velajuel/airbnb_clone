@@ -1,0 +1,10 @@
+<p>This is your current listings </p>
+<%=@editlist.property_type%>
+<%=@editlist.description%>
+<%=@editlist.price%>
+
+<p> Edit to:</p>
+<%= form_for [current_user, @editlist] do |form| %>
+	<%= render partial: '/listings/form', object: form %>
+	<%= form.submit %>
+	<% end %>

@@ -1,0 +1,21 @@
+<p> reservation page </p>
+
+<table>
+<td><%= @listing.property_type %></td>
+<td><%= @listing.description %></td>
+<td><%= @listing.price %></td>
+<td><%= @listing.verification %></td>
+</table>
+
+<div>
+<%= form_for [@listing, @reservation] do |form| %>
+<%= form.label :start_date %>
+<%= form.date_field :start_date %>
+<%= form.label :end_date %>
+<%= form.date_field :end_date %>
+<%= form.submit %>
+<% end %>
+</div>
+
+
+
