@@ -1,14 +1,77 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>AirbnbFaiz</title>
-    <%= csrf_meta_tags %>
+<head>
 
+    <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+</head>
+<body>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
 
-  <body>
-    <%= yield %>
-  </body>
+li {
+    float: left;
+    border-right:1px solid #bbb;
+}
+
+li:last-child {
+    border-right: none;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: #111;
+}
+
+.active {
+    background-color: #4CAF50;
+}
+</style>
+</head>
+<body>
+
+<ul>
+  <li><a class="active" href="#home">Home</a></li>
+  <% if current_user != nil%>
+  <li><%= link_to "Listings", user_listings_path(user_id: current_user.id) %></li>
+  <li style="float:right"><%= link_to "Sign Out", sign_out_path, method: :delete%></li>
+  <% end %>
+</ul>
+<br>
+<br>
+
+</body>
+</html>
+
+
+  <div id="flash">
+    <% flash.each do |key, value| -%>
+      <div id="flash_<%= key %>"><%=h value %></div>
+    <% end %>
+  </div> 
+
+  
+
+  <%= yield %>
+<br>
+
+</body>
+
 </html>
